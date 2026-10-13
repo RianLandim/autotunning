@@ -19,6 +19,7 @@ train.py        — LoRA, otimizador, schedule, loop de treino (o agente edita e
 program.md      — instruções do agente (você edita este para mudar o "método de pesquisa")
 test.py         — avaliação de modelo base/adapter; o split de teste é SÓ humano
 data/           — seu dataset (data/dataset.jsonl) e conversores, se houver
+examples/       — tarefa de exemplo e script de validação de ponta a ponta
 ```
 
 O **conjunto de teste** fica separado e o agente não pode acessá-lo. Como o agente roda centenas de experimentos contra o conjunto de validação, ele acaba se ajustando a ele. O teste, rodado por você no final, é a medida honesta.
@@ -64,6 +65,16 @@ Referência de VRAM para LoRA (aproximada; depende também de `MAX_SEQ_LEN` e do
 | 80 GB | até ~14B+                | até ~70B               |
 
 Modelos sem chat template (modelos base, não-instruct) usam um formato simples de fallback (`### User:` / `### Assistant:`).
+
+## Exemplo e validação
+
+[`examples/order_extraction`](examples/order_extraction) é uma tarefa pequena que valida o boilerplate de ponta a ponta. Ela roda numa pasta isolada, sem alterar o `prepare.py` da raiz:
+
+```bash
+uv run examples/run_example.py examples/order_extraction
+```
+
+Resultado de referência numa RTX 3070 Ti (8 GB), com Qwen2.5-0.5B-Instruct e 2 min de treino: task_score no teste de **0,32 → 1,00**. Use esse comando também para checar se o boilerplate continua funcionando depois de mudanças nele.
 
 ## Usando o resultado
 

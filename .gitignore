@@ -4,3 +4,4 @@ __pycache__/
 out/
 run.log
 results.tsv
+.example_runs/

@@ -1,0 +1,8 @@
+{
+  "BASE_MODEL": "Qwen/Qwen2.5-0.5B-Instruct",
+  "TIME_BUDGET": 120,
+  "MAX_SEQ_LEN": 512,
+  "TASK_EVAL": true,
+  "PRIMARY_METRIC": "task_score",
+  "MAX_NEW_TOKENS": 96
+}
