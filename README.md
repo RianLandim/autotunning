@@ -1,98 +1,98 @@
 # autotunning
 
-Boilerplate para **pesquisa autônoma de fine-tuning de qualquer modelo**, baseado no [autoresearch](https://github.com/karpathy/autoresearch) de Andrej Karpathy. Um agente de código (Claude Code, Codex etc.) configura o projeto com você e depois roda experimentos sozinho: edita o código de treino, treina por um tempo fixo, mede o resultado, mantém ou descarta a mudança e repete.
+A boilerplate for **autonomous fine-tuning research on any model**, based on Andrej Karpathy's [autoresearch](https://github.com/karpathy/autoresearch). A coding agent (Claude Code, Codex, etc.) sets up the project with you, then runs experiments on its own: it edits the training code, trains for a fixed amount of time, measures the result, keeps or discards the change, and repeats.
 
-O boilerplate não vem com nenhum modelo nem dataset predefinido. Você escolhe ambos, junto com o agente, na fase de configuração.
+The boilerplate ships with no predefined model or dataset. You pick both together with the agent during the configuration phase.
 
-## Como funciona
+## How it works
 
-O trabalho tem duas fases, ambas descritas no `program.md`, que é a "skill" do agente:
+The work happens in two phases, both described in `program.md`, which acts as the agent's "skill":
 
-1. **Configuração (interativa, uma vez por projeto).** O agente pergunta qual é a tarefa, verifica a GPU, propõe modelos que cabem nela, converte seus dados para o formato esperado, define a métrica com você, mede a referência do modelo sem treino e faz um teste rápido de treino. Você aprova cada escolha. No fim, a configuração é commitada e congelada.
-2. **Experimentação (autônoma).** Num branch `autotunning/<tag>`, o agente só edita `train.py` e roda o loop sem parar: treina → mede → mantém ou dá `git reset`. Os resultados ficam em `results.tsv`.
+1. **Configuration (interactive, once per project).** The agent asks about the task, checks the GPU, proposes models that fit on it, converts your data to the expected format, defines the metric with you, measures the untrained model as a reference, and runs a quick training smoke test. You approve every choice. At the end, the configuration is committed and frozen.
+2. **Experimentation (autonomous).** On an `autotunning/<tag>` branch, the agent only edits `train.py` and runs the loop indefinitely: train → measure → keep, or `git reset`. Results are logged to `results.tsv`.
 
-## Estrutura
+## Structure
 
 ```
-prepare.py      — configuração da tarefa, carregamento do modelo, split, tokenização, avaliação (congelado após a configuração)
-train.py        — LoRA, otimizador, schedule, loop de treino (o agente edita este na experimentação)
-program.md      — instruções do agente (você edita este para mudar o "método de pesquisa")
-test.py         — avaliação de modelo base/adapter; o split de teste é SÓ humano
-data/           — seu dataset (data/dataset.jsonl) e conversores, se houver
-examples/       — tarefa de exemplo e script de validação de ponta a ponta
+prepare.py      — task config, model loading, split, tokenization, evaluation (frozen after configuration)
+train.py        — LoRA, optimizer, schedule, training loop (the agent edits this during experimentation)
+program.md      — agent instructions (you edit this to change the "research method")
+test.py         — base model / adapter evaluation; the test split is HUMAN ONLY
+data/           — your dataset (data/dataset.jsonl) and converters, if any
+examples/       — example task and end-to-end validation script
 ```
 
-O **conjunto de teste** fica separado e o agente não pode acessá-lo. Como o agente roda centenas de experimentos contra o conjunto de validação, ele acaba se ajustando a ele. O teste, rodado por você no final, é a medida honesta.
+The **test split** is held out and the agent cannot access it. Since the agent runs hundreds of experiments against the validation split, it ends up fitting to it. The test split, run by you at the end, is the honest measure.
 
-## Começando um projeto
+## Starting a project
 
 ```bash
-git clone git@github.com:RianLandim/autotunning.git meu-projeto && cd meu-projeto
-git remote remove origin   # o projeto de fine-tuning vira um repo próprio
+git clone git@github.com:RianLandim/autotunning.git my-project && cd my-project
+git remote remove origin   # the fine-tuning project becomes its own repo
 uv sync
 ```
 
-Depois abra o agente nessa pasta (de preferência com as permissões liberadas, para ele rodar sozinho) e peça:
+Then open the agent in that folder (ideally with permissions unlocked so it can run on its own) and ask:
 
 ```
-Leia o program.md e vamos configurar um novo projeto de fine-tuning.
+Read program.md and let's set up a new fine-tuning project.
 ```
 
-Quando a configuração terminar:
+Once configuration is done:
 
 ```
-Vamos começar uma nova rodada de experimentos.
+Let's start a new round of experiments.
 ```
 
-## O que é configurado (topo do `prepare.py`)
+## What gets configured (top of `prepare.py`)
 
-| Constante | O que é |
+| Constant | What it is |
 |---|---|
-| `BASE_MODEL` | ID do Hugging Face ou caminho local de um causal LM de texto |
-| `LOAD_IN_4BIT` | QLoRA: carrega o modelo base em 4-bit para caber em GPUs menores |
-| `TRUST_REMOTE_CODE` | só para modelos que exigem código customizado do Hub |
-| `DATA_PATH` | dataset em jsonl no formato de chat (`{"messages": [...]}`) |
-| `MAX_SEQ_LEN`, `TIME_BUDGET` | tamanho máximo dos exemplos e tempo de treino por experimento |
-| `TASK_EVAL`, `PRIMARY_METRIC`, `score_prediction` | métrica: `val_loss` (genérica) ou `task_score` (gera respostas e pontua) |
+| `BASE_MODEL` | Hugging Face ID or local path of a text causal LM |
+| `LOAD_IN_4BIT` | QLoRA: loads the base model in 4-bit to fit smaller GPUs |
+| `TRUST_REMOTE_CODE` | only for models that require custom code from the Hub |
+| `DATA_PATH` | jsonl dataset in chat format (`{"messages": [...]}`) |
+| `MAX_SEQ_LEN`, `TIME_BUDGET` | max example length and training time per experiment |
+| `TASK_EVAL`, `PRIMARY_METRIC`, `score_prediction` | metric: `val_loss` (generic) or `task_score` (generates answers and scores them) |
 
-Referência de VRAM para LoRA (aproximada; depende também de `MAX_SEQ_LEN` e do tamanho do vocabulário):
+VRAM reference for LoRA (approximate; also depends on `MAX_SEQ_LEN` and vocabulary size):
 
 | VRAM  | bf16                     | 4-bit (`LOAD_IN_4BIT`) |
 |-------|--------------------------|------------------------|
-| 8 GB  | até ~1.5B                | até ~4B                |
-| 16 GB | até ~3–4B                | até ~8B                |
-| 24 GB | até ~7–8B (com gradient checkpointing) | até ~14B |
-| 80 GB | até ~14B+                | até ~70B               |
+| 8 GB  | up to ~1.5B              | up to ~4B              |
+| 16 GB | up to ~3–4B              | up to ~8B              |
+| 24 GB | up to ~7–8B (with gradient checkpointing) | up to ~14B |
+| 80 GB | up to ~14B+              | up to ~70B             |
 
-Modelos sem chat template (modelos base, não-instruct) usam um formato simples de fallback (`### User:` / `### Assistant:`).
+Models without a chat template (base, non-instruct models) use a simple fallback format (`### User:` / `### Assistant:`).
 
-## Exemplo e validação
+## Example and validation
 
-[`examples/order_extraction`](examples/order_extraction) é uma tarefa pequena que valida o boilerplate de ponta a ponta. Ela roda numa pasta isolada, sem alterar o `prepare.py` da raiz:
+[`examples/order_extraction`](examples/order_extraction) is a small task that validates the boilerplate end to end. It runs in an isolated folder without modifying the root `prepare.py`:
 
 ```bash
 uv run examples/run_example.py examples/order_extraction
 ```
 
-Resultado de referência numa RTX 3070 Ti (8 GB), com Qwen2.5-0.5B-Instruct e 2 min de treino: task_score no teste de **0,32 → 1,00**. Use esse comando também para checar se o boilerplate continua funcionando depois de mudanças nele.
+Reference result on an RTX 3070 Ti (8 GB), with Qwen2.5-0.5B-Instruct and 2 minutes of training: test task_score **0.32 → 1.00**. Also use this command to check that the boilerplate still works after you change it.
 
-## Usando o resultado
+## Using the result
 
-Cada execução de `train.py` salva o adapter LoRA em `out/adapter`. Para reproduzir o melhor experimento, faça checkout do último commit mantido do branch `autotunning/<tag>` e rode `uv run train.py`. Depois:
+Each `train.py` run saves the LoRA adapter to `out/adapter`. To reproduce the best experiment, check out the last kept commit of the `autotunning/<tag>` branch and run `uv run train.py`. Then:
 
 ```bash
-uv run test.py --base     # modelo base no teste (referência)
-uv run test.py            # adapter no teste
+uv run test.py --base     # base model on test (reference)
+uv run test.py            # adapter on test
 ```
 
-Para servir o modelo, carregue o base com `PeftModel.from_pretrained(model, "out/adapter")` ou faça merge com `model.merge_and_unload()` e salve o modelo completo.
+To serve the model, load the base with `PeftModel.from_pretrained(model, "out/adapter")`, or merge with `model.merge_and_unload()` and save the full model.
 
-## Limitações
+## Limitations
 
-- Uma GPU NVIDIA, um processo. Sem treino distribuído.
-- Só modelos de texto (`AutoModelForCausalLM`). Modelos multimodais ou de classificação (encoders) exigem adaptar `prepare.py` e `train.py`.
-- Modelos de raciocínio cujo chat template reescreve o histórico (ex.: remove `<think>`) não funcionam sem adaptar `apply_template`.
+- One NVIDIA GPU, one process. No distributed training.
+- Text models only (`AutoModelForCausalLM`). Multimodal or classification (encoder) models require adapting `prepare.py` and `train.py`.
+- Reasoning models whose chat template rewrites history (e.g. strips `<think>`) don't work without adapting `apply_template`.
 
-## Licença
+## License
 
-MIT. Baseado no [autoresearch](https://github.com/karpathy/autoresearch) (MIT, Andrej Karpathy); veja `LICENSE`.
+MIT. Based on [autoresearch](https://github.com/karpathy/autoresearch) (MIT, Andrej Karpathy); see `LICENSE`.
