@@ -1,19 +1,14 @@
 [project]
-name = "autoresearch"
+name = "autotunning"
 version = "0.1.0"
-description = "Autonomous pretraining research swarm"
+description = "Autonomous fine-tuning research for task-specific models"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "kernels>=0.11.7",
-    "matplotlib>=3.10.8",
-    "numpy>=2.2.6",
-    "pandas>=2.3.3",
-    "pyarrow>=21.0.0",
-    "requests>=2.32.0",
-    "rustbpe>=0.1.0",
-    "tiktoken>=0.11.0",
+    "bitsandbytes>=0.45.0",
+    "peft>=0.17.0",
     "torch==2.9.1",
+    "transformers>=4.56.0",
 ]
 
 [tool.uv.sources]
