@@ -1,0 +1,511 @@
+{
+  "backend": "local:Qwen/Qwen3-4B-Instruct-2507 (4-bit)",
+  "seconds": 69.3,
+  "requisitos": [
+    {
+      "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+      "tipo": "obrigatorio",
+      "id": "R1",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+      "tipo": "obrigatorio",
+      "id": "R2",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+      "tipo": "obrigatorio",
+      "id": "R3",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência com Docker",
+      "tipo": "obrigatorio",
+      "id": "R4",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência com pipelines de CI/CD",
+      "tipo": "obrigatorio",
+      "id": "R5",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+      "tipo": "obrigatorio",
+      "id": "R6",
+      "peso": 3
+    },
+    {
+      "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+      "tipo": "obrigatorio",
+      "id": "R7",
+      "peso": 3
+    },
+    {
+      "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+      "tipo": "desejavel",
+      "id": "R8",
+      "peso": 1
+    },
+    {
+      "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+      "tipo": "desejavel",
+      "id": "R9",
+      "peso": 1
+    },
+    {
+      "requisito": "certificação AWS",
+      "tipo": "desejavel",
+      "id": "R10",
+      "peso": 1
+    }
+  ],
+  "ranking": [
+    {
+      "id": "ana",
+      "nome": "Ana Ribeiro",
+      "score": 100.0,
+      "obrigatorios_pendentes": [],
+      "avaliacoes": [
+        {
+          "id": "R1",
+          "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Desenvolvimento de APIs REST em Python com FastAPI para processamento de cobranças via Pix e boleto\nModelagem e otimização de consultas em PostgreSQL (tabelas com mais de 200 milhões de linhas)\nFilas de processamento assíncrono com AWS SQS e workers em ECS\nPipelines de CI/CD no GitHub Actions com deploy de containers Docker",
+          "justificativa": "O currículo mostra 5 anos e 8 meses de experiência como Desenvolvedora Backend Sênior em PagaJá (a partir de mar/2021), com desenvolvimento em Python (FastAPI), o que atende ao requisito de 3 anos ou mais de experiência com Python em desenvolvimento backend. A experiência anterior em Loja Norte (2 anos e 2 meses) também envolve Python, mas a experiência mais recente e relevante já atende completamente o requisito.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R2",
+          "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Desenvolvimento de APIs REST em Python com FastAPI para processamento de cobranças via Pix e boleto | Manutenção de e-commerce em Django e Django REST Framework",
+          "justificativa": "O currículo menciona experiência com FastAPI na PagaJá (desenvolvimento de APIs REST em Python com FastAPI) e com Django na Loja Norte (manutenção de e-commerce em Django e Django REST Framework). Ambas as tecnologias são diretamente relacionadas ao requisito. O período de experiência com FastAPI é de [5 anos e 8 meses] e com Django é de [2 anos e 2 meses], o que atende plenamente ao requisito de experiência com FastAPI ou Django na construção de APIs REST.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R3",
+          "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Modelagem e otimização de consultas em PostgreSQL (tabelas com mais de 200 milhões de linhas)",
+          "justificativa": "O currículo menciona explicitamente a modelagem e otimização de consultas em PostgreSQL, o que comprova experiência com bancos de dados relacionais, com preferência por PostgreSQL conforme solicitado.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R4",
+          "requisito": "experiência com Docker",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Pipelines de CI/CD no GitHub Actions com deploy de containers Docker",
+          "justificativa": "O currículo menciona explicitamente que o candidato utiliza 'pipelines de CI/CD no GitHub Actions com deploy de containers Docker', o que comprova experiência direta com Docker.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R5",
+          "requisito": "experiência com pipelines de CI/CD",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Pipelines de CI/CD no GitHub Actions com deploy de containers Docker",
+          "justificativa": "O currículo menciona explicitamente 'Pipelines de CI/CD no GitHub Actions com deploy de containers Docker' na experiência em PagaJá, o que comprova experiência direta com pipelines de CI/CD.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R6",
+          "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Filas de processamento assíncrono com AWS SQS e workers em ECS\nAWS Certified Developer – Associate (2022)",
+          "justificativa": "O currículo menciona experiência com AWS SQS e ECS no contexto de filas de processamento assíncrono, o que atende diretamente ao requisito de experiência com serviços da AWS (SQS, ECS). Além disso, o candidato possui a certificação AWS Certified Developer – Associate, o que reforça conhecimento prático da plataforma. O tempo de experiência com esses serviços está presente na vaga de PagaJá (5 anos e 8 meses), com uso direto de SQS e ECS.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R7",
+          "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Inglês avançado (trabalho diário com time nos EUA)",
+          "justificativa": "O currículo menciona que o candidato tem inglês avançado e que o utiliza em trabalho diário com time nos EUA, o que implica que o inglês é usado com frequência em contextos de reuniões e leitura de documentação. Como 'avançado' inclui o nível intermediário, o requisito de inglês intermediário para leitura de documentação e reuniões ocasionais é atendido.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R8",
+          "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "PagaJá (fintech de pagamentos) — Desenvolvedora Backend Sênior, mar/2021 – atual [5 anos e 8 meses]\n- Desenvolvimento de APIs REST em Python com FastAPI para processamento de cobranças via Pix e boleto\n- Modelagem e otimização de consultas em PostgreSQL (tabelas com mais de 200 milhões de linhas)\n- Filas de processamento assíncrono com AWS SQS e workers em ECS\n- Pipelines de CI/CD no GitHub Actions com deploy de containers Docker",
+          "justificativa": "O currículo menciona experiência na PagaJá, uma fintech de pagamentos, com cargo de Desenvolvedora Backend Sênior desde mar/2021. O trabalho envolveu desenvolvimento de APIs para processamento de cobranças via Pix e boleto, diretamente relacionado a sistemas de pagamentos. Isso atende claramente ao requisito de experiência em fintech, pagamentos ou sistemas financeiros.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R9",
+          "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "Filas de processamento assíncrono com AWS SQS e workers em ECS",
+          "justificativa": "O currículo menciona experiência com filas de processamento assíncrono usando AWS SQS, que é uma mensageria compatível com o requisito (SQS). Isso atende diretamente ao requisito de experiência com mensageria (Kafka, RabbitMQ ou SQS).",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R10",
+          "requisito": "certificação AWS",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "AWS Certified Developer – Associate (2022)",
+          "justificativa": "O currículo menciona explicitamente a certificação AWS Certified Developer – Associate obtida em 2022, o que atende diretamente ao requisito de certificação AWS.",
+          "evidencia_verificada": true
+        }
+      ]
+    },
+    {
+      "id": "carla",
+      "nome": "Carla Mendes",
+      "score": 75.0,
+      "obrigatorios_pendentes": [
+        "R1",
+        "R2"
+      ],
+      "avaliacoes": [
+        {
+          "id": "R1",
+          "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "Scripts em Python para automação de relatórios e rotinas de dados (uso ocasional)",
+          "justificativa": "O currículo menciona uso ocasional de Python para automação de relatórios e rotinas de dados, mas não há evidência de experiência com Python em desenvolvimento backend, nem de pelo menos 3 anos de tempo dedicado a esse uso. A experiência principal é em Java com Spring Boot, e o uso de Python é descrito como ocasional, sem detalhes de projeto, responsabilidade ou duração significativa. Portanto, não atende ao requisito de 3 anos de experiência com Python em desenvolvimento backend.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R2",
+          "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "Scripts em Python para automação de relatórios e rotinas de dados (uso ocasional)",
+          "justificativa": "O currículo menciona experiência com Python para automação de relatórios e rotinas de dados, mas não especifica o uso de FastAPI ou Django para construção de APIs REST. Apesar do uso ocasional de Python, não há menção a frameworks como FastAPI ou Django, nem a construção de APIs REST. Portanto, não há evidência direta de experiência com esses frameworks.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R3",
+          "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Bancos Oracle e PostgreSQL",
+          "justificativa": "O currículo menciona experiência com 'PostgreSQL' como banco de dados utilizado no contexto de infraestrutura na AWS (RDS), com exposição direta ao banco de dados PostgreSQL como parte da stack tecnológica. O período de experiência é de 9 anos e 10 meses, o que atende ao requisito de experiência com bancos de dados relacionais, com preferência por PostgreSQL.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R4",
+          "requisito": "experiência com Docker",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Infraestrutura na AWS: ECS, RDS, Lambda; pipelines de CI/CD com Jenkins e Docker",
+          "justificativa": "O currículo menciona explicitamente a utilização de Docker nos pipelines de CI/CD com Jenkins e Docker, o que comprova experiência direta com Docker.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R5",
+          "requisito": "experiência com pipelines de CI/CD",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Infraestrutura na AWS: ECS, RDS, Lambda; pipelines de CI/CD com Jenkins e Docker",
+          "justificativa": "O currículo menciona explicitamente 'pipelines de CI/CD com Jenkins e Docker' na experiência no Banco Horizonte, com duração de [9 anos e 10 meses], o que atende ao requisito de experiência com pipelines de CI/CD.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R6",
+          "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Infraestrutura na AWS: ECS, RDS, Lambda; pipelines de CI/CD com Jenkins e Docker\nAWS Certified Solutions Architect – Associate (2021)",
+          "justificativa": "O currículo menciona experiência direta com serviços da AWS, incluindo ECS, RDS e Lambda, dentro do contexto de infraestrutura na AWS. Além disso, o candidato possui a certificação AWS Certified Solutions Architect – Associate, o que reforça o conhecimento prático e teórico dos serviços da AWS. O período de experiência é de 9 anos e 10 meses, o que atende ao requisito de experiência com esses serviços.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R7",
+          "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Inglês avançado",
+          "justificativa": "O currículo menciona 'Inglês avançado', o que atende ao requisito de 'inglês intermediário para leitura de documentação e reuniões ocasionais', pois o nível avançado implica necessariamente domínio suficiente para compreensão de documentação e participação em reuniões ocasionais.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R8",
+          "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "Microsserviços em Java com Spring Boot para o sistema de conciliação bancária\nMensageria com Apache Kafka entre os serviços de liquidação\nBancos Oracle e PostgreSQL\nInfraestrutura na AWS: ECS, RDS, Lambda; pipelines de CI/CD com Jenkins e Docker\nScripts em Python para automação de relatórios e rotinas de dados (uso ocasional)",
+          "justificativa": "O currículo menciona experiência em sistemas de conciliação bancária e microsserviços para o sistema de liquidação bancária, que está diretamente ligado a pagamentos e sistemas financeiros. Além disso, o trabalho com mensageria (Apache Kafka) em um contexto bancário e a integração com bancos Oracle e PostgreSQL indicam envolvimento com processos financeiros. Embora não haja explicitamente o termo 'fintech', a experiência em sistemas de liquidação bancária e conciliação é diretamente relacionada a pagamentos e sistemas financeiros, típicos de fintech.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R9",
+          "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "Mensageria com Apache Kafka entre os serviços de liquidação",
+          "justificativa": "O currículo menciona experiência com 'Mensageria com Apache Kafka entre os serviços de liquidação', o que atende diretamente ao requisito de experiência com mensageria (Kafka, RabbitMQ ou SQS), já que Kafka está entre as tecnologias listadas.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R10",
+          "requisito": "certificação AWS",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "atende",
+          "evidencia": "AWS Certified Solutions Architect – Associate (2021)",
+          "justificativa": "O currículo menciona explicitamente a certificação \"AWS Certified Solutions Architect – Associate\" obtida em 2021, o que atende diretamente ao requisito de certificação AWS.",
+          "evidencia_verificada": true
+        }
+      ]
+    },
+    {
+      "id": "diego",
+      "nome": "Diego Santos",
+      "score": 68.8,
+      "obrigatorios_pendentes": [
+        "R5",
+        "R6"
+      ],
+      "avaliacoes": [
+        {
+          "id": "R1",
+          "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Modelos de previsão de demanda em Python (pandas, scikit-learn) | Disponibilização de modelos via API com FastAPI (2 serviços internos)",
+          "justificativa": "O currículo menciona experiência com Python em modelagem de previsão de demanda (usando pandas e scikit-learn) e em criação de APIs com FastAPI. Apesar de o cargo ser de Cientista de Dados, o uso de Python para desenvolvimento de modelos e APIs indica experiência com Python em um contexto de backend. A duração da experiência é de 6 anos e 10 meses, o que atende ao requisito de 3 anos ou mais. O trecho sobre FastAPI, que é um framework backend para APIs, é especialmente relevante para desenvolvimento backend.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R2",
+          "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Disponibilização de modelos via API com FastAPI (2 serviços internos)",
+          "justificativa": "O currículo menciona experiência com FastAPI na construção de APIs, especificamente em \"Disponibilização de modelos via API com FastAPI (2 serviços internos)\", o que atende diretamente ao requisito de experiência com FastAPI na construção de APIs REST.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R3",
+          "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Consultas analíticas em PostgreSQL e BigQuery",
+          "justificativa": "O currículo menciona 'consultas analíticas em PostgreSQL', o que comprova experiência com bancos de dados relacionais e especificamente com PostgreSQL, conforme o requisito.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R4",
+          "requisito": "experiência com Docker",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Notebooks e jobs agendados no Airflow, rodando em Docker",
+          "justificativa": "O currículo menciona que os notebooks e jobs agendados no Airflow são rodados em Docker, o que comprova experiência direta com Docker.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R5",
+          "requisito": "experiência com pipelines de CI/CD",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "parcial",
+          "evidencia": "Notebooks e jobs agendados no Airflow, rodando em Docker",
+          "justificativa": "O currículo menciona que o candidato utiliza Airflow para executar 'notebooks e jobs agendados', o que indica experiência com ferramentas de automação e gerenciamento de tarefas — um componente essencial em pipelines de CI/CD. Embora não haja menção explícita a integração com sistemas de build, testes ou entrega automática (como GitHub Actions ou Jenkins), o uso de Airflow em ambientes com Docker sugere experiência com pipelines de integração contínua e entrega contínua, especialmente em contextos de processos automatizados e agendados. Portanto, há evidência de experiência com pipelines de CI/CD, embora indireta.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R6",
+          "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona qualquer referência a serviços da AWS, como Lambda, ECS, SQS ou RDS. Apesar de haver uso de Docker e Airflow, não há menção a serviços específicos da AWS.",
+          "evidencia_verificada": false
+        },
+        {
+          "id": "R7",
+          "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Inglês intermediário",
+          "justificativa": "O currículo menciona explicitamente que o candidato tem inglês intermediário, o que atende diretamente ao requisito de inglês intermediário para leitura de documentação e reuniões ocasionais.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R8",
+          "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona qualquer experiência específica em fintech, pagamentos ou sistemas financeiros. A experiência em varejo, embora envolva análise de dados, não é diretamente relacionada a setores financeiros ou pagamentos. Não há evidência de trabalho com sistemas financeiros, pagamentos ou tecnologias específicas da fintech.",
+          "evidencia_verificada": false
+        },
+        {
+          "id": "R9",
+          "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona qualquer experiência com mensageria como Kafka, RabbitMQ ou SQS. As ferramentas citadas (Airflow, Docker, Python, pandas, scikit-learn, FastAPI, PostgreSQL, BigQuery) estão relacionadas a pipelines de dados, modelagem e APIs, mas não há referência direta a sistemas de mensageria.",
+          "evidencia_verificada": false
+        },
+        {
+          "id": "R10",
+          "requisito": "certificação AWS",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona qualquer referência a certificação AWS.",
+          "evidencia_verificada": false
+        }
+      ]
+    },
+    {
+      "id": "bruno",
+      "nome": "Bruno Carvalho",
+      "score": 37.5,
+      "obrigatorios_pendentes": [
+        "R2",
+        "R3",
+        "R5",
+        "R6"
+      ],
+      "avaliacoes": [
+        {
+          "id": "R1",
+          "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Agência Pixel — Desenvolvedor Backend, ago/2023 – atual [3 anos e 3 meses]\n- APIs em Flask para sites institucionais e pequenos sistemas internos\n- Banco de dados MySQL\n- Containers com Docker Compose em ambiente de desenvolvimento",
+          "justificativa": "O candidato possui 3 anos e 3 meses de experiência como Desenvolvedor Backend na Agência Pixel, com foco em APIs em Flask, o que atende diretamente ao requisito de experiência com Python em desenvolvimento backend. O período de 3 anos e 3 meses é superior aos 3 anos exigidos.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R2",
+          "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "APIs em Flask para sites institucionais e pequenos sistemas internos",
+          "justificativa": "O currículo menciona experiência com APIs em Flask, mas não há menção a FastAPI ou Django. O requisito pede experiência com FastAPI ou Django, e o candidato apenas menciona Flask, que é uma tecnologia diferente. Portanto, não há evidência de experiência com FastAPI ou Django.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R3",
+          "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "Banco de dados MySQL",
+          "justificativa": "O currículo menciona experiência com 'Banco de dados MySQL', mas não há menção a PostgreSQL ou qualquer outro banco relacional com foco em PostgreSQL. O requisito especifica experiência com PostgreSQL de preferência, e o candidato apenas lista MySQL, que é um banco relacional, mas diferente do solicitado. Como não há evidência de experiência com PostgreSQL, o requisito não é atendido.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R4",
+          "requisito": "experiência com Docker",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Containers com Docker Compose em ambiente de desenvolvimento",
+          "justificativa": "O currículo menciona experiência com 'Containers com Docker Compose em ambiente de desenvolvimento' na posição em Agência Pixel, o que comprova experiência prática com Docker.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R5",
+          "requisito": "experiência com pipelines de CI/CD",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "Containers com Docker Compose em ambiente de desenvolvimento",
+          "justificativa": "O currículo menciona uso de Docker Compose em ambiente de desenvolvimento, o que pode indicar experiência com containers, mas não há menção a pipelines de CI/CD (como Jenkins, GitHub Actions, GitLab CI, etc.) ou a automação de build, testes ou deploy. A experiência com Docker em desenvolvimento não é equivalente a experiência com pipelines de CI/CD, que envolvem fluxos automatizados de integração e entrega.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R6",
+          "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo menciona apenas uso de Docker Compose e banco de dados MySQL, sem referência a serviços da AWS como Lambda, ECS, SQS ou RDS. Não há menção a nuvem, serviços em ambientes de produção ou tecnologias específicas da AWS.",
+          "evidencia_verificada": false
+        },
+        {
+          "id": "R7",
+          "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+          "tipo": "obrigatorio",
+          "peso": 3,
+          "status": "atende",
+          "evidencia": "Inglês intermediário",
+          "justificativa": "O currículo menciona explicitamente que o candidato possui inglês intermediário, o que atende diretamente ao requisito de inglês intermediário para leitura de documentação e reuniões ocasionais.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R8",
+          "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "APIs em Flask para sites institucionais e pequenos sistemas internos",
+          "justificativa": "O currículo menciona apenas desenvolvimento de APIs para sites institucionais e sistemas internos, com foco em tecnologias como Flask, MySQL e Docker. Não há menção a fintech, pagamentos ou sistemas financeiros específicos, como processamento de transações, integração com gateways de pagamento, sistemas de boletos, ou qualquer componente financeiro. A experiência está voltada para sites institucionais e automações, sem evidência de atuação em áreas financeiras ou de pagamentos.",
+          "evidencia_verificada": true
+        },
+        {
+          "id": "R9",
+          "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona nenhuma experiência com mensageria como Kafka, RabbitMQ ou SQS. As atividades descritas estão focadas em APIs em Flask, banco de dados MySQL e containers com Docker Compose, mas não há referência a sistemas de mensageria.",
+          "evidencia_verificada": false
+        },
+        {
+          "id": "R10",
+          "requisito": "certificação AWS",
+          "tipo": "desejavel",
+          "peso": 1,
+          "status": "nao_atende",
+          "evidencia": "",
+          "justificativa": "O currículo não menciona qualquer certificação AWS.",
+          "evidencia_verificada": false
+        }
+      ]
+    }
+  ]
+}

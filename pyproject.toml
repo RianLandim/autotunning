@@ -11,6 +11,11 @@ dependencies = [
     "transformers>=4.56.0",
 ]
 
+[project.optional-dependencies]
+sagemaker = [
+    "boto3>=1.43.113",
+]
+
 [tool.uv.sources]
 torch = [
     { index = "pytorch-cu128" },

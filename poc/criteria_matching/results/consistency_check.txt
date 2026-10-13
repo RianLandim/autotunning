@@ -1,0 +1,35 @@
+
+Ana Ribeiro (score 100.0)
+  as João Pereira       score  +0.0  no change
+  as Maria Oliveira     score  +0.0  no change
+  as Kauã da Silva      score  +0.0  no change
+  as Yasmin Nascimento  score  +0.0  no change
+  as Hiroshi Tanaka     score  +0.0  no change
+  as Fatima Haddad      score  +0.0  no change
+
+Bruno Carvalho (score 43.8)
+  as João Pereira       score  +0.0  no change
+  as Maria Oliveira     score  -6.3  R5 parcial→nao_atende
+  as Kauã da Silva      score  +0.0  no change
+  as Yasmin Nascimento  score  -6.3  R5 parcial→nao_atende
+  as Hiroshi Tanaka     score  -6.3  R5 parcial→nao_atende
+  as Fatima Haddad      score  -6.3  R5 parcial→nao_atende
+
+Carla Mendes (score 75.0)
+  as João Pereira       score  +0.0  no change
+  as Maria Oliveira     score  +0.0  no change
+  as Kauã da Silva      score  +0.0  no change
+  as Yasmin Nascimento  score  +0.0  no change
+  as Hiroshi Tanaka     score  +0.0  no change
+  as Fatima Haddad      score  +0.0  no change
+
+Diego Santos (score 68.8)
+  as João Pereira       score  +6.2  R5 parcial→atende
+  as Maria Oliveira     score  +0.0  no change
+  as Kauã da Silva      score  +0.0  no change
+  as Yasmin Nascimento  score  +6.2  R5 parcial→atende
+  as Hiroshi Tanaka     score  +0.0  no change
+  as Fatima Haddad      score  -6.3  R1 atende→parcial
+
+verdicts changed by the name alone: 7/240 (2.9%)
+largest score change: 6.3 points

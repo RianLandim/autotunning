@@ -1,0 +1,56 @@
+[
+  {
+    "requisito": "3 anos ou mais de experiência com Python em desenvolvimento backend",
+    "tipo": "obrigatorio",
+    "id": "R1",
+    "peso": 3
+  },
+  {
+    "requisito": "experiência com FastAPI ou Django na construção de APIs REST",
+    "tipo": "obrigatorio",
+    "id": "R2",
+    "peso": 3
+  },
+  {
+    "requisito": "experiência com bancos de dados relacionais (PostgreSQL de preferência)",
+    "tipo": "obrigatorio",
+    "id": "R3",
+    "peso": 3
+  },
+  {
+    "requisito": "experiência com Docker e pipelines de CI/CD",
+    "tipo": "obrigatorio",
+    "id": "R4",
+    "peso": 3
+  },
+  {
+    "requisito": "experiência com serviços da AWS (ex.: Lambda, ECS, SQS, RDS)",
+    "tipo": "obrigatorio",
+    "id": "R5",
+    "peso": 3
+  },
+  {
+    "requisito": "inglês intermediário para leitura de documentação e reuniões ocasionais",
+    "tipo": "obrigatorio",
+    "id": "R6",
+    "peso": 3
+  },
+  {
+    "requisito": "experiência em fintech, pagamentos ou sistemas financeiros",
+    "tipo": "desejavel",
+    "id": "R7",
+    "peso": 1
+  },
+  {
+    "requisito": "experiência com mensageria (Kafka, RabbitMQ ou SQS)",
+    "tipo": "desejavel",
+    "id": "R8",
+    "peso": 1
+  },
+  {
+    "requisito": "certificação AWS",
+    "tipo": "desejavel",
+    "id": "R9",
+    "peso": 1
+  }
+]
