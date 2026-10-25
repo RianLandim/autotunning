@@ -51,7 +51,9 @@ PASS_THRESHOLD = 1.0
 def custom_checks(prediction, reference, record):
     """
     Optional hard requirements specific to this task, as {check_name: bool}.
-    Any failing custom check sets the example's score to 0.
+    Any failing custom check sets the example's score to 0. If this function raises
+    (e.g. parse_json on invalid output), it counts as a failed check, so it is safe
+    to assume a well-formed answer here.
     `prediction` is the raw model output; `parsed` JSON is available via parse_json(prediction).
     `record` is the full dataset record (may be None), including any "meta" keys.
     Examples: total == sum(items), date is ISO-8601, answer cites an id present in the input.
@@ -179,7 +181,10 @@ def check_prediction(prediction, reference, record=None):
         score, checks, fields = _check_text(prediction, reference)
     else:
         raise ValueError(f"unknown OUTPUT_TYPE {OUTPUT_TYPE!r}")
-    custom = {f"custom:{k}": bool(v) for k, v in custom_checks(prediction, reference, record).items()}
+    try:
+        custom = {f"custom:{k}": bool(v) for k, v in custom_checks(prediction, reference, record).items()}
+    except Exception:  # e.g. unparseable output inside a custom check: the requirement is not met
+        custom = {"custom:error": False}
     checks.update(custom)
     if custom and not all(custom.values()):
         score = 0.0
