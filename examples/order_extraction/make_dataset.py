@@ -50,7 +50,10 @@ def make_example(rng):
         {"role": "system", "content": SYSTEM},
         {"role": "user", "content": message},
         {"role": "assistant", "content": json.dumps(answer, ensure_ascii=False)},
-    ]}
+    ], "meta": {  # ignored by training; used by benchmark.py for the per-category breakdown
+        "quantity_spelled_out": q_text != str(quantidade),
+        "has_payment": pagamento is not None,
+    }}
 
 
 if __name__ == "__main__":

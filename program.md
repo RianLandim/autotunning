@@ -6,25 +6,33 @@ There are two phases. **Phase 1 (Configuration)** is interactive: you set up the
 
 ## Phase 1: Configuration (interactive, once per project)
 
-Goal: fill in the task configuration at the top of `prepare.py` and get a clean, prepared dataset. This is the only time `prepare.py` may be edited, and every choice below needs the human's approval.
+Goal: define the task in `task.py`, fill in the configuration at the top of `prepare.py` and get a clean, prepared dataset. This is the only time `task.py` and `prepare.py` may be edited, and every choice below needs the human's approval.
 
-1. **Read the in-scope files**: `README.md`, `prepare.py`, `train.py`, `test.py`.
-2. **Understand the task**: ask the human what the model should do, what a good answer looks like, and what data they have. Keep it short — a few questions, not an interview.
-3. **Check the hardware**: run `nvidia-smi` and note the GPU and VRAM.
-4. **Choose the base model** with the human. Propose 1–3 candidates that fit the task and the VRAM (see the table in `README.md`; set `LOAD_IN_4BIT = True` for models that only fit in 4-bit). Requirements: a text causal LM loadable with `AutoModelForCausalLM`; an instruct/chat variant is usually best. Mention license and whether the model is gated (gated models need `hf auth login` by the human). Avoid reasoning models whose chat template rewrites history (e.g. strips `<think>`) unless you adapt `apply_template`. Set `BASE_MODEL` (and `TRUST_REMOTE_CODE` only if the model requires it and the human agrees).
-5. **Prepare the data** in `data/dataset.jsonl`, one example per line:
+1. **Define the task first (`task.py`).** Before anything else, ask the human what the model must do and what a correct answer looks like *in real use*, then fill in `task.py`:
+   - `TASK_NAME` and `TASK_DESCRIPTION`: what comes in, what must come out, in the human's words.
+   - `OUTPUT_TYPE`: `"json"` (structured extraction), `"label"` (classification) or `"text"` (free text).
+   - The functional checks for that type: `JSON_FIELDS` with a comparator per field (`exact`, `normalized`, `number`, `set`, `contains`) and `JSON_STRICT_KEYS`; or `LABELS`; or `TEXT_REQUIRED_PATTERNS`.
+   - `custom_checks()`: hard business rules a correct answer must satisfy (e.g. totals add up, dates are valid, ids exist in the input). Ask the human: "what would make an answer wrong even if it looks right?"
+   - `PASS_THRESHOLD`: when an example counts as fully correct.
+   Run `python task.py` (self-check) and test `check_prediction` on 2–3 real examples with the human (one correct answer, one wrong) to confirm the checks catch what matters.
+2. **Read the in-scope files**: `README.md`, `task.py`, `prepare.py`, `train.py`, `test.py`, `benchmark.py`.
+3. **Understand the data**: ask what data they have and how much. Keep it short — a few questions, not an interview.
+4. **Check the hardware**: run `nvidia-smi` and note the GPU and VRAM.
+5. **Choose the base model** with the human. Propose 1–3 candidates that fit the task and the VRAM (see the table in `README.md`; set `LOAD_IN_4BIT = True` for models that only fit in 4-bit). Requirements: a text causal LM loadable with `AutoModelForCausalLM`; an instruct/chat variant is usually best. Mention license and whether the model is gated (gated models need `hf auth login` by the human). Avoid reasoning models whose chat template rewrites history (e.g. strips `<think>`) unless you adapt `apply_template`. Set `BASE_MODEL` (and `TRUST_REMOTE_CODE` only if the model requires it and the human agrees).
+6. **Prepare the data** in `data/dataset.jsonl`, one example per line:
    ```json
-   {"messages": [{"role": "system", "content": "..."}, {"role": "user", "content": "..."}, {"role": "assistant", "content": "target answer"}]}
+   {"messages": [{"role": "system", "content": "..."}, {"role": "user", "content": "..."}, {"role": "assistant", "content": "target answer"}], "meta": {"category": "..."}}
    ```
-   The loss is applied only to the last assistant message. If the human's data is in another format (CSV, spreadsheet, other JSON), write a converter in `data/` (e.g. `data/convert.py`) and run it — do not hand-edit records. Only create synthetic data if the human explicitly asks for it, and say clearly that results on synthetic data do not transfer automatically to real data. Extra keys per record (e.g. `"meta"`) are allowed and ignored by training.
-6. **Define the metric** with the human:
-   - If answers are verifiable (labels, JSON fields, exact values), implement `score_prediction` in `prepare.py`, set `TASK_EVAL = True` and `PRIMARY_METRIC = "task_score"`, and set `MAX_NEW_TOKENS` to cover the longest expected answer.
-   - Otherwise (open-ended text, style), keep `PRIMARY_METRIC = "val_loss"`.
-7. **Set the budget**: `TIME_BUDGET` (default 300s; bigger models or datasets may need more) and `MAX_SEQ_LEN`.
-8. **Prepare**: run `uv run prepare.py`. Check the printed lengths: if many examples are dropped or truncated, discuss raising `MAX_SEQ_LEN` with the human.
-9. **Zero-shot reference**: run `uv run test.py --base --split val > base.log 2>&1` and report the base model's val metrics to the human. This is the number fine-tuning has to beat.
-10. **Smoke test**: run `uv run train.py > run.log 2>&1` once. If it OOMs, adjust `DEVICE_BATCH_SIZE`/`GRAD_ACCUM_STEPS`/`GRADIENT_CHECKPOINTING` in `train.py` (or propose `LOAD_IN_4BIT` / a smaller model to the human) until it fits.
-11. **Freeze**: make sure the project is a git repository (`git init` if needed) and commit the configuration (`prepare.py`, `data/`, `train.py`) on the main branch. From now on `prepare.py` and `data/` are read-only.
+   The loss is applied only to the last assistant message. If the human's data is in another format (CSV, spreadsheet, other JSON), write a converter in `data/` (e.g. `data/convert.py`) and run it — do not hand-edit records. Only create synthetic data if the human explicitly asks for it, and say clearly that results on synthetic data do not transfer automatically to real data. The optional `"meta"` object is ignored by training; put low-cardinality labels there (category, source, difficulty) so the benchmark can break results down by them.
+7. **Golden set (strongly recommended)**: ask the human for real, human-verified cases that reflect production use, in the same format, saved as `data/benchmark.jsonl`. They must not be in `dataset.jsonl` (`benchmark.py` warns about overlap). Synthetic training data plus a real golden set is the honest way to know if tuning works in practice. The golden set is HUMAN ONLY, like the test split.
+8. **Define the metric** with the human:
+   - For `json` and `label` tasks (verifiable answers): set `TASK_EVAL = True` and `PRIMARY_METRIC = "task_score"` (it uses the checks in `task.py`), and set `MAX_NEW_TOKENS` to cover the longest expected answer.
+   - For open-ended `text` without `TEXT_REQUIRED_PATTERNS`, keep `PRIMARY_METRIC = "val_loss"`.
+9. **Set the budget**: `TIME_BUDGET` (default 300s; bigger models or datasets may need more) and `MAX_SEQ_LEN`.
+10. **Prepare**: run `uv run prepare.py`. Check the printed lengths: if many examples are dropped or truncated, discuss raising `MAX_SEQ_LEN` with the human.
+11. **Zero-shot reference**: run `uv run benchmark.py --only base --split val > base.log 2>&1` and report the base model's score, pass rate and failing checks to the human. This is what fine-tuning has to beat.
+12. **Smoke test**: run `uv run train.py > run.log 2>&1` once. If it OOMs, adjust `DEVICE_BATCH_SIZE`/`GRAD_ACCUM_STEPS`/`GRADIENT_CHECKPOINTING` in `train.py` (or propose `LOAD_IN_4BIT` / a smaller model to the human) until it fits.
+13. **Freeze**: make sure the project is a git repository (`git init` if needed) and commit the configuration (`task.py`, `prepare.py`, `data/`, `train.py`) on the main branch. From now on `task.py`, `prepare.py`, `benchmark.py` and `data/` are read-only.
 
 ## Phase 2 setup
 
@@ -34,6 +42,7 @@ To start a new experiment run, work with the user to:
 2. **Create the branch**: `git checkout -b autotunning/<tag>` from the main branch.
 3. **Read the in-scope files**: The project is small. Read these files for full context:
    - `README.md` — project context.
+   - `task.py` — the task definition and its functional checks. Do not modify.
    - `prepare.py` — task configuration (base model, metric, time budget), data split, tokenization, dataloader, evaluation. Do not modify.
    - `train.py` — the file you modify. LoRA config, optimizer, schedule, training loop.
    - A handful of lines of `data/dataset.jsonl` (e.g. `head -n 5`) to understand the task. Do not read the whole file.
@@ -51,9 +60,9 @@ Each experiment runs on a single GPU. The training script runs for a **fixed tim
 - Modify `train.py` — this is the only file you edit. Everything is fair game: LoRA rank/alpha/dropout, target modules, which layers are adapted, learning rate and schedule, batch size, gradient accumulation, optimizer, loss tweaks, gradient checkpointing, or even replacing LoRA with another parameter-efficient method or partial full fine-tuning, as long as it uses the packages already installed.
 
 **What you CANNOT do:**
-- Modify `prepare.py`. It is read-only after Phase 1. It contains the base model, the data split, the time budget, the scoring function and the evaluation harness.
-- Modify or add data. Do not edit, generate, augment or read in bulk anything under `data/`. Do not read `.cache/test.pt`.
-- Evaluate on the test split: never run `test.py` without `--split val`, and never call anything with `_allow_test=True`. The test split is reserved for the human's final check; touching it invalidates the whole run.
+- Modify `task.py`, `prepare.py` or `benchmark.py`. They are read-only after Phase 1. They contain the task definition and its checks, the base model, the data split, the time budget and the evaluation harness.
+- Modify or add data. Do not edit, generate, augment or read in bulk anything under `data/` (including `data/benchmark.jsonl`). Do not read `.cache/test.pt`.
+- Evaluate on the test split or the golden set: never run `test.py` or `benchmark.py` without `--split val`, never pass `--data` to `benchmark.py`, and never call anything with `_allow_test=True`. They are reserved for the human's final check; touching them invalidates the whole run.
 - Change the base model (`BASE_MODEL`) or tokenizer. The question is how well *this* model can be adapted.
 - Install new packages or add dependencies. You can only use what's already in `pyproject.toml`.
 - Modify the evaluation. The `evaluate` function in `prepare.py` is the ground truth metric.

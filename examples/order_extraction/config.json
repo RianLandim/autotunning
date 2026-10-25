@@ -4,5 +4,12 @@
   "MAX_SEQ_LEN": 512,
   "TASK_EVAL": true,
   "PRIMARY_METRIC": "task_score",
-  "MAX_NEW_TOKENS": 96
+  "MAX_NEW_TOKENS": 96,
+  "task": {
+    "TASK_NAME": "order_extraction",
+    "TASK_DESCRIPTION": "Given a free-text customer message in Portuguese, return a JSON order with produto, quantidade (integer, even when spelled out), cidade and pagamento (pix, boleto, cartao or null).",
+    "OUTPUT_TYPE": "json",
+    "JSON_FIELDS": {"produto": "normalized", "quantidade": "number", "cidade": "normalized", "pagamento": "exact"},
+    "JSON_STRICT_KEYS": true
+  }
 }

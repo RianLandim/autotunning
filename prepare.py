@@ -55,27 +55,27 @@ META_PATH = os.path.join(CACHE_DIR, "meta.json")
 SPLITS = ("train", "val", "test")
 
 # ---------------------------------------------------------------------------
-# Task scoring (customize per project, then frozen)
+# Task scoring: defined in task.py (filled in at the start of setup, then frozen)
 # ---------------------------------------------------------------------------
+
+import task
+
 
 def score_prediction(prediction, reference):
     """
     Score one generated answer against the reference answer, in [0, 1].
-    Default: JSON-aware exact match (compares parsed JSON when both sides parse,
-    otherwise whitespace-stripped strings). Replace with whatever measures
-    success for your use case (F1, label accuracy, regex checks, ...).
+    Delegates to task.py, so task_score (optimized by the agent) and the
+    functional benchmark (benchmark.py) always use the same checks.
     """
-    prediction, reference = prediction.strip(), reference.strip()
-    try:
-        return float(json.loads(prediction) == json.loads(reference))
-    except (json.JSONDecodeError, TypeError):
-        return float(prediction == reference)
+    return task.score_prediction(prediction, reference)
 
 # ---------------------------------------------------------------------------
 # Data preparation
 # ---------------------------------------------------------------------------
 
 def check_config():
+    if not task.is_configured():
+        sys.exit("task.py is not configured (TASK_NAME / TASK_DESCRIPTION). Define the task first (Phase 1, step 1 in program.md).")
     if not BASE_MODEL:
         sys.exit("BASE_MODEL is not set. Choose a model and set it in prepare.py (see Phase 1 in program.md).")
     assert PRIMARY_METRIC in ("val_loss", "task_score")
